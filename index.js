@@ -9,7 +9,24 @@ class Libro{
     }
 }
 
-const Libros = [ ];
+function agregarLibro(){
+    //Obtener elementos del formulario
+    let titulo = document.getElementById("inputTitulo").value;
+    let autor = document.getElementById("inputAutor").value;
+    let ISBN = document.getElementById("inputISBN").value;
+    //Sumarlos al array Libros
+    Libros.push(new Libro(titulo, autor, ISBN));
+    //Actualizar el localStorage
+    const actualizar = (clave, valor) => {localStorage.setItem(clave, valor) }; 
+    actualizar("librosAlmacenados", JSON.stringify(Libros));
+mostrandoLibros();
+}
+
+//Libros pre-guardados
+const libro1 = new Libro("1Q84", "Haruki Murakami", "9780307476463");
+const libro2 = new Libro("Inferno", "Dan Brown", "9780345806482");
+
+const Libros = [ libro1 , libro2 ];
 
 //Almacenar libros en localStorage
 const guardarLocal = (clave, valor) => {localStorage.setItem(clave, valor) }; 
@@ -51,7 +68,7 @@ async function mostrandoLibros() {
     }
     
 }
-
+mostrandoLibros();
 
 //Eliminar un libro agregado
 function deleteBook(el) {
@@ -75,17 +92,6 @@ function removeBook(isbn) {
         localStorage.setItem('books', JSON.stringify(books));
       }
 
-function agregarLibro(){
-    //Obtener elementos del formulario
-    let titulo = document.getElementById("inputTitulo").value;
-    let autor = document.getElementById("inputAutor").value;
-    let ISBN = document.getElementById("inputISBN").value;
-    //Sumarlos al array Libros
-    Libros.push(new Libro(titulo, autor, ISBN));
-    //Actualizar la 'base de datos'
-    const actualizar = (clave, valor) => {localStorage.setItem(clave, valor) }; 
-    actualizar("librosAlmacenados", JSON.stringify(Libros));
-mostrandoLibros();
-}
+
 
 
